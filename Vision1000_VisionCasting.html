@@ -1,0 +1,1432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Vision 1,000 — A Public Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink:    #1A1A1A;
+    --gold:   #B8960C;
+    --gold-lt:#D4B94A;
+    --cream:  #FAF7F0;
+    --cream2: #F2EDE0;
+    --mid:    #4A4A4A;
+    --light:  #7A7A7A;
+    --dark2:  #2A2A2A;
+    --dark3:  #222222;
+    --white:  #FFFFFF;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: var(--ink);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 2.5rem;
+    height: 52px;
+  }
+  nav .nav-brand {
+    font-family: 'EB Garamond', serif;
+    font-size: 1rem; font-style: italic;
+    color: var(--gold);
+    letter-spacing: 0.04em;
+  }
+  nav .nav-links {
+    display: flex; gap: 1.6rem; list-style: none;
+  }
+  nav .nav-links a {
+    color: rgba(255,255,255,0.65);
+    text-decoration: none;
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  nav .nav-links a:hover { color: var(--gold-lt); }
+
+  /* ── SECTIONS ── */
+  section {
+    padding: 6rem 2rem 5rem;
+    text-align: center;
+  }
+  section:nth-child(even) { background: var(--cream2); }
+
+  /* ── SECTION HEADER ── */
+  .section-eyebrow {
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.6rem;
+  }
+  .section-title {
+    font-family: 'EB Garamond', serif;
+    font-size: clamp(1.9rem, 3.5vw, 2.8rem);
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.15;
+    margin-bottom: 0.5rem;
+  }
+  .section-subtitle {
+    font-size: 0.9rem;
+    color: var(--light);
+    font-style: italic;
+    margin-bottom: 2.8rem;
+  }
+  .gold-rule {
+    width: 56px; height: 2px;
+    background: var(--gold);
+    margin: 0 auto 2.8rem;
+  }
+
+  /* ── INNER CONTAINER ── */
+  .inner {
+    max-width: 1080px;
+    margin: 0 auto;
+  }
+
+  /* ── PROSE ── */
+  .prose {
+    max-width: 760px;
+    margin: 0 auto 2.4rem;
+    color: var(--mid);
+    font-size: 1rem;
+    line-height: 1.8;
+    text-align: justify;
+    text-align-last: center;
+  }
+
+  /* ── ①  HERO / COVER ── */
+  #cover {
+    background: var(--ink);
+    padding: 0;
+    min-height: 100vh;
+    display: flex; flex-direction: column;
+    justify-content: center; align-items: center;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  #cover::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 50% 60%, rgba(184,150,12,0.07) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .cover-tag {
+    font-size: 0.68rem; font-weight: 600; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--gold);
+    margin-bottom: 1.6rem;
+  }
+  .cover-stars {
+    font-size: 1rem; color: var(--gold);
+    letter-spacing: 0.5em;
+    margin-bottom: 1.8rem;
+  }
+  .cover-title {
+    font-family: 'EB Garamond', serif;
+    font-size: clamp(3.5rem, 9vw, 7.5rem);
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1;
+    letter-spacing: -0.01em;
+    margin-bottom: 0.5rem;
+  }
+  .cover-title span { color: var(--gold); }
+  .cover-rule {
+    width: 80px; height: 1px;
+    background: var(--gold);
+    margin: 1.4rem auto;
+  }
+  .cover-tagline {
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    color: rgba(255,255,255,0.75);
+    font-style: italic;
+    font-family: 'EB Garamond', serif;
+    margin-bottom: 0.8rem;
+  }
+  .cover-desc {
+    max-width: 660px;
+    font-size: 0.88rem;
+    color: rgba(255,255,255,0.5);
+    line-height: 1.8;
+    margin: 0 auto 2.8rem;
+    text-align: center;
+  }
+  .cover-quote-box {
+    border: 1px solid rgba(184,150,12,0.45);
+    max-width: 580px;
+    margin: 0 auto 1.2rem;
+    padding: 1.5rem 2rem;
+  }
+  .cover-quote-box p {
+    font-family: 'EB Garamond', serif;
+    font-size: 1.05rem;
+    font-style: italic;
+    color: rgba(255,255,255,0.88);
+    line-height: 1.7;
+    text-align: center;
+  }
+  .cover-quote-box .ref {
+    display: block;
+    margin-top: 0.7rem;
+    font-size: 0.75rem;
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    color: var(--gold);
+    letter-spacing: 0.1em;
+    text-align: center;
+  }
+  .cover-scroll {
+    position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
+    color: rgba(255,255,255,0.25);
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    animation: bob 2s ease-in-out infinite;
+  }
+  @keyframes bob { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(6px)} }
+
+  /* ── ② WHAT IS IT ── */
+  .concept-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+  @media(max-width:680px){ .concept-grid{ grid-template-columns:1fr 1fr; } }
+  .concept-card {
+    background: var(--ink);
+    padding: 1.4rem 1.2rem 1.6rem;
+    text-align: center;
+    border: 1px solid rgba(184,150,12,0.3);
+  }
+  .concept-card .c-label {
+    font-size: 0.62rem; font-weight: 700; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--gold);
+    margin-bottom: 0.7rem;
+    display: block;
+  }
+  .concept-card .c-divider {
+    width: 28px; height: 1px; background: var(--gold);
+    margin: 0 auto 0.7rem;
+  }
+  .concept-card p {
+    font-size: 0.85rem; color: rgba(255,255,255,0.78);
+    line-height: 1.6; text-align: center;
+  }
+
+  /* ── ③ FOUNDATIONS ── */
+  .panel-trio {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 2rem;
+    margin-top: 2rem;
+    text-align: left;
+  }
+  @media(max-width:720px){ .panel-trio{ grid-template-columns:1fr; } }
+  .panel {
+    padding: 0;
+  }
+  .panel-num {
+    font-family: 'EB Garamond', serif;
+    font-size: 3rem; font-weight: 700;
+    color: var(--gold); line-height: 1;
+    margin-bottom: 0.4rem;
+  }
+  .panel-title {
+    font-family: 'EB Garamond', serif;
+    font-size: 1.15rem; font-weight: 700;
+    color: var(--ink); margin-bottom: 0.2rem;
+  }
+  .panel-sub {
+    font-size: 0.78rem; color: var(--mid);
+    font-style: italic; margin-bottom: 0.3rem;
+  }
+  .ref-tag {
+    display: inline-block;
+    font-size: 0.68rem; color: var(--gold);
+    letter-spacing: 0.06em;
+    margin-bottom: 0.6rem;
+  }
+  .panel-rule {
+    width: 100%; height: 1px;
+    background: var(--gold-lt); opacity: 0.4;
+    margin-bottom: 0.8rem;
+  }
+  .panel p {
+    font-size: 0.88rem; color: var(--mid);
+    line-height: 1.75; text-align: justify;
+  }
+  .domain-list {
+    list-style: none;
+    margin-top: 0.7rem;
+  }
+  .domain-list li {
+    font-size: 0.84rem; color: var(--mid);
+    line-height: 1.65;
+    padding: 0.22rem 0 0.22rem 1.1rem;
+    position: relative;
+    border-bottom: 1px solid rgba(184,150,12,0.12);
+  }
+  .domain-list li:last-child { border-bottom: none; }
+  .domain-list li::before {
+    content: '✦';
+    position: absolute; left: 0;
+    color: var(--gold); font-size: 0.52rem;
+    top: 0.42rem;
+  }
+  .scripture-footer {
+    margin-top: 3rem;
+    padding: 1.4rem 2rem;
+    border-top: 1px solid var(--gold-lt);
+    border-bottom: 1px solid var(--gold-lt);
+    max-width: 680px; margin-left: auto; margin-right: auto;
+  }
+  .scripture-footer p {
+    font-family: 'EB Garamond', serif;
+    font-size: 1rem; font-style: italic;
+    color: var(--ink); line-height: 1.7;
+    text-align: center;
+  }
+  .scripture-footer .ref {
+    display: block; margin-top: 0.5rem;
+    font-size: 0.72rem; font-family: 'Inter', sans-serif;
+    font-style: normal; color: var(--gold);
+    text-align: center; letter-spacing: 0.08em;
+  }
+
+  /* ── ④ CONVICTIONS ── */
+  .conviction-intro {
+    max-width: 760px; margin: 0 auto 2.4rem;
+    color: var(--mid); font-size: 1rem; line-height: 1.8;
+    text-align: justify; text-align-last: center;
+  }
+  .two-col {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 0; max-width: 900px; margin: 0 auto 2rem;
+    border: 1px solid rgba(184,150,12,0.2);
+  }
+  @media(max-width:640px){ .two-col{ grid-template-columns:1fr; } }
+  .two-col-pane {
+    padding: 1.8rem 1.8rem 2rem;
+    text-align: center;
+  }
+  .two-col-pane:first-child {
+    background: var(--ink);
+    border-right: 1px solid rgba(184,150,12,0.25);
+  }
+  .two-col-pane:last-child { background: var(--dark2); }
+  .two-col-pane h4 {
+    font-size: 0.68rem; font-weight: 700; letter-spacing: 0.16em;
+    text-transform: uppercase; color: var(--gold);
+    margin-bottom: 1.2rem;
+  }
+  .two-col-pane ul { list-style: none; }
+  .two-col-pane ul li {
+    font-size: 0.86rem; color: rgba(255,255,255,0.78);
+    line-height: 1.65; margin-bottom: 0.6rem;
+    padding-left: 1rem; position: relative;
+    text-align: left;
+  }
+  .two-col-pane ul li::before {
+    content: '—'; position: absolute; left: 0;
+    color: var(--gold); font-size: 0.8rem;
+  }
+  .founder-box {
+    background: var(--dark3);
+    border: 1px solid rgba(184,150,12,0.3);
+    max-width: 900px; margin: 0 auto;
+    padding: 1.8rem 2.2rem;
+    text-align: center;
+  }
+  .founder-box h4 {
+    font-size: 0.68rem; font-weight: 700; letter-spacing: 0.16em;
+    text-transform: uppercase; color: var(--gold);
+    margin-bottom: 1rem;
+  }
+  .founder-box p {
+    font-size: 0.9rem; color: rgba(255,255,255,0.78);
+    line-height: 1.75; text-align: justify; text-align-last: center;
+  }
+  .founder-box .ref-tag { color: var(--gold-lt); margin-bottom: 0.8rem; display: block; }
+
+  /* ── ⑤ DISCIPLESHIP ── */
+  .disc-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 2.2rem 3rem;
+    max-width: 960px; margin: 0 auto;
+    text-align: left;
+  }
+  @media(max-width:640px){ .disc-grid{ grid-template-columns:1fr; } }
+  .disc-item {}
+  .disc-item .di-num {
+    font-size: 0.68rem; font-weight: 700; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--gold);
+    margin-bottom: 0.3rem;
+  }
+  .disc-item h3 {
+    font-family: 'EB Garamond', serif;
+    font-size: 1.15rem; font-weight: 700;
+    color: var(--ink); margin-bottom: 0.2rem;
+  }
+  .disc-item .ref-tag { margin-bottom: 0.5rem; }
+  .disc-item .panel-rule { margin-bottom: 0.7rem; }
+  .disc-item p {
+    font-size: 0.88rem; color: var(--mid);
+    line-height: 1.75; text-align: justify;
+  }
+
+  /* ── ⑥ STRUCTURE ── */
+  .org-stack {
+    display: flex; flex-direction: column;
+    gap: 6px; max-width: 640px; margin: 0 auto 2.8rem;
+  }
+  .org-card {
+    padding: 1.1rem 1.5rem;
+    text-align: center;
+    border: 1px solid rgba(184,150,12,0.35);
+    position: relative;
+  }
+  .org-card:nth-child(1){ background: var(--ink); }
+  .org-card:nth-child(2){ background: var(--dark2); }
+  .org-card:nth-child(3){ background: var(--dark3); }
+  .org-card:nth-child(4){ background: #2e2e2e; }
+  .org-connector {
+    width: 1px; height: 10px; background: var(--gold);
+    margin: 0 auto; opacity: 0.6;
+  }
+  .org-card h3 {
+    font-family: 'EB Garamond', serif;
+    font-size: 1rem; font-weight: 700; color: var(--gold);
+    margin-bottom: 0.3rem;
+  }
+  .org-card p {
+    font-size: 0.82rem; color: rgba(255,255,255,0.72);
+    line-height: 1.6; text-align: center;
+  }
+  .safeguards-row {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 1.2rem; max-width: 900px; margin: 0 auto;
+  }
+  @media(max-width:620px){ .safeguards-row{ grid-template-columns:1fr; } }
+  .safe-box {
+    background: var(--ink);
+    border: 1px solid rgba(184,150,12,0.3);
+    padding: 1.6rem 1.6rem 1.8rem;
+    text-align: center;
+  }
+  .safe-box h4 {
+    font-size: 0.65rem; font-weight: 700; letter-spacing: 0.16em;
+    text-transform: uppercase; color: var(--gold); margin-bottom: 0.5rem;
+  }
+  .safe-box .ref-tag { margin-bottom: 0.8rem; display: block; }
+  .safe-box ul { list-style: none; text-align: left; }
+  .safe-box ul li {
+    font-size: 0.84rem; color: rgba(255,255,255,0.74);
+    line-height: 1.65; margin-bottom: 0.5rem;
+    padding-left: 1rem; position: relative;
+  }
+  .safe-box ul li::before { content:'—'; position:absolute; left:0; color:var(--gold); }
+  .safe-box p {
+    font-size: 0.84rem; color: rgba(255,255,255,0.74);
+    line-height: 1.7; text-align: justify; text-align-last: center;
+  }
+
+  /* ── ⑦ COMMUNITY LIFE ── */
+  .life-cols {
+    display: grid; grid-template-columns: 1fr 1px 1fr;
+    gap: 0 2.5rem; max-width: 880px; margin: 0 auto 2.8rem;
+    text-align: left;
+  }
+  @media(max-width:640px){ .life-cols{ grid-template-columns:1fr; } .life-divider{display:none;} }
+  .life-divider { background: var(--gold-lt); opacity: 0.35; }
+  .life-col h3 {
+    font-size: 0.7rem; font-weight: 700; letter-spacing: 0.16em;
+    text-transform: uppercase; color: var(--ink);
+    margin-bottom: 0.5rem;
+  }
+  .life-col .panel-rule { margin-bottom: 0.9rem; }
+  .life-col ul { list-style: none; }
+  .life-col ul li {
+    font-size: 0.88rem; color: var(--mid);
+    line-height: 1.65; margin-bottom: 0.5rem;
+    padding-left: 1.2rem; position: relative;
+  }
+  .life-col ul li::before { content:'—'; position:absolute; left:0; color:var(--gold); }
+  .life-col .ref-tag { margin-top: 0.8rem; display: block; }
+  .life-bottom {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 1.5rem; max-width: 880px; margin: 0 auto;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(184,150,12,0.25);
+  }
+  @media(max-width:620px){ .life-bottom{ grid-template-columns:1fr; } }
+  .life-bottom-block { text-align: left; }
+  .life-bottom-block h4 {
+    font-size: 0.65rem; font-weight: 700; letter-spacing: 0.16em;
+    text-transform: uppercase; color: var(--gold); margin-bottom: 0.5rem;
+  }
+  .life-bottom-block .ref-tag { margin-bottom: 0.6rem; display: block; }
+  .life-bottom-block p {
+    font-size: 0.87rem; color: var(--mid);
+    line-height: 1.75; text-align: justify;
+  }
+
+  /* ── ⑧ PHASES ── */
+  .phases-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    max-width: 1060px; margin: 0 auto;
+  }
+  @media(max-width:760px){ .phases-grid{ grid-template-columns:1fr 1fr; } }
+  @media(max-width:480px){ .phases-grid{ grid-template-columns:1fr; } }
+  .phase-card {
+    background: var(--ink);
+    border: 1px solid rgba(184,150,12,0.3);
+    padding: 1.6rem 1.4rem 1.8rem;
+    text-align: center;
+    display: flex; flex-direction: column;
+  }
+  .phase-card.sending {
+    background: var(--gold);
+    border-color: var(--gold);
+  }
+  .phase-range {
+    font-family: 'EB Garamond', serif;
+    font-size: 1.5rem; font-weight: 700;
+    color: var(--gold); line-height: 1;
+    margin-bottom: 0.4rem;
+  }
+  .phase-card.sending .phase-range { color: var(--ink); }
+  .phase-name {
+    font-family: 'EB Garamond', serif;
+    font-size: 1rem; font-weight: 700;
+    color: rgba(255,255,255,0.9);
+    margin-bottom: 0.4rem;
+  }
+  .phase-card.sending .phase-name { color: var(--ink); }
+  .phase-sub {
+    font-size: 0.72rem; font-weight: 600;
+    color: var(--gold-lt); letter-spacing: 0.06em;
+    margin-bottom: 0.8rem;
+    font-style: italic;
+  }
+  .phase-card.sending .phase-sub { color: rgba(26,26,26,0.7); }
+  .phase-divider {
+    width: 32px; height: 1px; background: rgba(184,150,12,0.4);
+    margin: 0 auto 0.8rem;
+  }
+  .phase-card.sending .phase-divider { background: rgba(26,26,26,0.25); }
+  .phase-body {
+    font-size: 0.82rem; color: rgba(255,255,255,0.72);
+    line-height: 1.65; text-align: justify; text-align-last: center;
+    flex: 1;
+    margin-bottom: 0.8rem;
+  }
+  .phase-card.sending .phase-body { color: rgba(26,26,26,0.75); }
+  .phase-refs {
+    font-size: 0.65rem; color: var(--gold-lt);
+    letter-spacing: 0.06em; font-style: italic;
+    margin-top: auto;
+  }
+  .phase-card.sending .phase-refs { color: rgba(26,26,26,0.55); }
+  .phases-note {
+    max-width: 700px; margin: 2rem auto 0;
+    font-size: 0.82rem; font-style: italic;
+    color: var(--light); text-align: center;
+  }
+
+  /* ── ⑨ MEASUREMENTS ── */
+  .measures-table {
+    width: 100%; max-width: 960px; margin: 0 auto;
+    border-collapse: collapse;
+  }
+  .measures-table thead tr {
+    background: var(--ink);
+  }
+  .measures-table thead th {
+    padding: 0.9rem 1.1rem;
+    font-size: 0.65rem; font-weight: 700;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--gold); text-align: left;
+  }
+  .measures-table tbody tr:nth-child(odd)  { background: var(--cream2); }
+  .measures-table tbody tr:nth-child(even) { background: var(--cream); }
+  .measures-table td {
+    padding: 0.9rem 1.1rem;
+    vertical-align: top;
+    font-size: 0.87rem; color: var(--mid);
+    line-height: 1.65;
+  }
+  .measures-table td:first-child {
+    font-weight: 600; color: var(--ink); width: 22%;
+  }
+  .measures-table td:first-child span {
+    display: block; font-size: 0.75rem; font-weight: 400;
+    font-style: italic; color: var(--light);
+  }
+  .measures-table td:last-child {
+    font-size: 0.75rem; color: var(--gold);
+    font-style: italic; width: 22%;
+  }
+  .measures-caption {
+    max-width: 760px; margin: 1.4rem auto 0;
+    font-size: 0.8rem; font-style: italic;
+    color: var(--light); text-align: center;
+    border-top: 1px solid var(--gold-lt);
+    padding-top: 1rem;
+  }
+
+  /* ── ⑩ MULTIPLICATION ── */
+  .mult-panels {
+    display: grid; grid-template-columns: repeat(3,1fr);
+    gap: 1.2rem; max-width: 980px; margin: 0 auto 2rem;
+  }
+  @media(max-width:680px){ .mult-panels{ grid-template-columns:1fr; } }
+  .mult-card {
+    background: var(--ink);
+    border: 1px solid rgba(184,150,12,0.3);
+    padding: 1.7rem 1.5rem 2rem;
+    text-align: center;
+  }
+  .mult-card h3 {
+    font-family: 'EB Garamond', serif;
+    font-size: 1.05rem; font-weight: 700;
+    color: var(--gold); margin-bottom: 0.3rem;
+  }
+  .mult-card .ref-tag { margin-bottom: 0.7rem; display: block; }
+  .mult-card .phase-divider { margin-bottom: 0.9rem; }
+  .mult-card p {
+    font-size: 0.86rem; color: rgba(255,255,255,0.74);
+    line-height: 1.75; text-align: justify; text-align-last: center;
+  }
+  .tension-box {
+    background: var(--dark2);
+    border: 1px solid rgba(184,150,12,0.4);
+    max-width: 980px; margin: 0 auto;
+    padding: 1.8rem 2.2rem;
+    text-align: center;
+  }
+  .tension-box h4 {
+    font-size: 0.65rem; font-weight: 700; letter-spacing: 0.16em;
+    text-transform: uppercase; color: var(--gold); margin-bottom: 0.5rem;
+  }
+  .tension-box .ref-tag { margin-bottom: 0.9rem; display: block; }
+  .tension-box p {
+    font-size: 0.88rem; color: rgba(255,255,255,0.74);
+    line-height: 1.75; text-align: justify; text-align-last: center;
+  }
+
+  /* ── ⑪ SCRIPTURE INDEX ── */
+  .index-grid {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 2rem 2.5rem;
+    max-width: 1000px; margin: 0 auto;
+    text-align: left;
+  }
+  @media(max-width:740px){ .index-grid{ grid-template-columns:1fr 1fr; } }
+  @media(max-width:480px){ .index-grid{ grid-template-columns:1fr; } }
+  .index-cat h4 {
+    font-size: 0.65rem; font-weight: 700; letter-spacing: 0.16em;
+    text-transform: uppercase; color: var(--ink);
+    margin-bottom: 0.4rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 1px solid var(--gold-lt);
+  }
+  .index-cat ul { list-style: none; margin-top: 0.5rem; }
+  .index-cat ul li {
+    display: flex; gap: 0.6rem;
+    font-size: 0.8rem; line-height: 1.55;
+    margin-bottom: 0.4rem;
+    color: var(--mid);
+  }
+  .index-cat ul li .i-ref {
+    flex-shrink: 0;
+    font-weight: 600; color: var(--gold);
+    min-width: 80px;
+  }
+  .index-cat ul li .i-desc {
+    color: var(--mid);
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--ink);
+    padding: 2.5rem 2rem;
+    text-align: center;
+    color: rgba(255,255,255,0.4);
+    font-size: 0.78rem;
+    letter-spacing: 0.06em;
+  }
+  footer .f-title {
+    font-family: 'EB Garamond', serif;
+    font-size: 1rem; font-style: italic;
+    color: var(--gold); margin-bottom: 0.4rem;
+  }
+  footer .f-stars { color: var(--gold); letter-spacing: 0.4em; margin-bottom: 0.5rem; }
+
+  /* ── SCROLL REVEAL ── */
+  .reveal {
+    opacity: 0; transform: translateY(22px);
+    transition: opacity 0.55s ease, transform 0.55s ease;
+  }
+  .reveal.visible { opacity: 1; transform: none; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <span class="nav-brand">Vision 1,000</span>
+  <ul class="nav-links">
+    <li><a href="#what">What It Is</a></li>
+    <li><a href="#foundations">Foundations</a></li>
+    <li><a href="#convictions">Convictions</a></li>
+    <li><a href="#discipleship">Discipleship</a></li>
+    <li><a href="#structure">Structure</a></li>
+    <li><a href="#life">Community Life</a></li>
+    <li><a href="#phases">Phases</a></li>
+    <li><a href="#measures">Measures</a></li>
+    <li><a href="#multiplication">Multiplication</a></li>
+    <li><a href="#index">Scripture Index</a></li>
+  </ul>
+</nav>
+
+<!-- ① COVER -->
+<section id="cover">
+  <div>
+    <p class="cover-tag">A Public Guide to Understanding the Vision</p>
+    <p class="cover-stars">✦ &nbsp; ✦ &nbsp; ✦</p>
+    <h1 class="cover-title">Vision <span>1,000</span></h1>
+    <div class="cover-rule"></div>
+    <p class="cover-tagline">What It Is. Why It Exists. How It Works.</p>
+    <p class="cover-desc">
+      A plain-language introduction to the biblical vision of a Christ-centered community of
+      one thousand disciples — its purpose, its structure, its limits, and the movement
+      it is meant to set in motion.
+    </p>
+    <div class="cover-quote-box">
+<p>
+        "The least of you will become a thousand..."
+        <span class="ref">— Isaiah 60:22</span>
+      </p>
+      <p>
+        "And I tell you that you are Peter, and on this rock I will build my church,
+        and the gates of Hades will not overcome it."
+        <span class="ref">— Matthew 16:18</span>
+      </p>
+    </div>
+    <div class="cover-quote-box" style="margin-top:1rem; border-color: rgba(184,150,12,0.25);">
+      <p style="font-size:0.95rem; color:rgba(255,255,255,0.65);">
+        "The number 1,000 is not the vision itself. It is a visible measurement and
+        a practical boundary that serves the vision.
+        <span style="color:var(--gold);">The vision is Christ.</span>"
+      </p>
+    </div>
+  </div>
+  <p class="cover-scroll">↓ &nbsp; scroll</p>
+</section>
+
+<!-- ② WHAT IS VISION 1,000 -->
+<section id="what">
+  <div class="inner">
+    <p class="section-eyebrow reveal">01 · What Is Vision 1,000?</p>
+    <h2 class="section-title reveal">The Vision Explained</h2>
+    <p class="section-subtitle reveal">In plain language, for anyone encountering it for the first time</p>
+    <div class="gold-rule reveal"></div>
+
+    <p class="prose reveal">
+      <i>"The least of you will become a thousand..." — Isaiah 60:22</i> <b>Vision 1,000</b> is the pursuit of a community of one thousand visible and available disciples
+      whose lives are being transformed by the gospel of Jesus Christ — faithfully cultivating and
+      guarding all that God has entrusted to them, so that Christ may be glorified in them, through
+      them, and beyond them. It is not a church growth strategy. It is not a membership drive.
+      It is a deliberate, biblically-rooted commitment to forming real people into real disciples
+      within a community that is small enough to be known and large enough to send.
+    </p>
+
+    <div class="concept-grid reveal">
+      <div class="concept-card">
+        <span class="c-label">The Vision</span>
+        <div class="c-divider"></div>
+        <p>Christ — and His glory revealed through transformed lives</p>
+      </div>
+      <div class="concept-card">
+        <span class="c-label">The Mission</span>
+        <div class="c-divider"></div>
+        <p>Disciple-making through the Great Commission</p>
+      </div>
+      <div class="concept-card">
+        <span class="c-label">The Framework</span>
+        <div class="c-divider"></div>
+        <p>Abad &amp; Shamar — the shape of the life Christ has freed us into</p>
+      </div>
+      <div class="concept-card">
+        <span class="c-label">The Number</span>
+        <div class="c-divider"></div>
+        <p>A visible measure and practical boundary, not the goal itself</p>
+      </div>
+      <div class="concept-card">
+        <span class="c-label">The Outcome</span>
+        <div class="c-divider"></div>
+        <p>A flourishing community bearing witness to God's glory</p>
+      </div>
+      <div class="concept-card">
+        <span class="c-label">The Movement</span>
+        <div class="c-divider"></div>
+        <p>Leaders raised, disciples sent, new communities planted</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ③ BIBLICAL FOUNDATIONS -->
+<section id="foundations">
+  <div class="inner">
+    <p class="section-eyebrow reveal">02 · The Biblical Foundations</p>
+    <h2 class="section-title reveal">Where the Vision Comes From</h2>
+    <p class="section-subtitle reveal">Three passages that form the architectural load-bearing walls</p>
+    <div class="gold-rule reveal"></div>
+
+    <div class="panel-trio reveal">
+      <div class="panel">
+        <div class="panel-num">1</div>
+        <h3 class="panel-title">Work &amp; Keep</h3>
+        <p class="panel-sub">The Shape of the Life Christ Frees Us Into</p>
+        <span class="ref-tag">Gen. 2:15 · 2 Cor. 3:18 · Rom. 8:29 · Col. 1:10 · Eph. 2:10</span>
+        <div class="panel-rule"></div>
+        <p>Before anything went wrong, God placed humanity in the garden with a clear mandate:
+        work it and keep it. The Hebrew words — <em>abad</em> and <em>shamar</em> — mean to cultivate and to guard.
+        What Adam failed to keep, Christ fulfilled. And those who belong to Him are being
+        continuously transformed into that same image (2 Cor. 3:18 · Rom. 8:29).</p>
+        <p style="margin-top:0.75rem;">Abad and Shamar is therefore not a command reimposed from
+        the outside. It is no longer merely a first human calling — it is the shape of the life
+        Christ has freed us into, extending faithfully across every domain:</p>
+        <ul class="domain-list">
+          <li>Relationship with God</li>
+          <li>Marriage and family</li>
+          <li>Personal character and vocation</li>
+          <li>Resources, gifts, and talents</li>
+          <li>Relationships and ministry</li>
+          <li>Future generations</li>
+        </ul>
+      </div>
+      <div class="panel">
+        <div class="panel-num">2</div>
+        <h3 class="panel-title">Wanderers Brought Home</h3>
+        <p class="panel-sub">The Community's Identity</p>
+        <span class="ref-tag">Ps. 107:35–38 · Ps. 78:4</span>
+        <div class="panel-rule"></div>
+        <p>Psalm 107 tells the story of people lost, bound, and broken — brought into fruitfulness
+        by God alone. This is the identity of every person in a Vision 1,000 community: not those
+        who have it together, but those who have been found. The community is not a club for the
+        already-formed. It is a place where formerly wandering people learn, sharpened together (Prov. 27:17), to live in
+        the ordered fruitfulness that God restores. Their story will be told to the next generation (Ps. 78:4).</p>
+      </div>
+      <div class="panel">
+        <div class="panel-num">3</div>
+        <h3 class="panel-title">Christ Builds His Church</h3>
+        <p class="panel-sub">The Commission That Drives It</p>
+        <span class="ref-tag">Matt. 16:18 · Matt. 28:17–20 · Acts 1:8 · Eph. 2:20</span>
+        <div class="panel-rule"></div>
+        <p>The church is not a human project — it is Christ's building, built on the foundation of
+        apostles and prophets, with Christ as the cornerstone (Eph. 2:20). The Great Commission —
+        go, baptize, teach obedience — is the operational charter. The Holy Spirit is the only
+        sufficient engine (Acts 1:8). Vision 1,000 is not built on the ambition of a founder.
+        It is an attempt to be faithful to what Jesus said He would do through His people.</p>
+      </div>
+    </div>
+
+    <div class="scripture-footer reveal">
+      <p>"He turned the desert into pools of water… there he brought the hungry to live,
+      and they founded a city where they could settle."
+      <span class="ref">Psalm 107:35–36 — the image behind Vision 1,000's community life</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- ④ THEOLOGICAL CONVICTIONS -->
+<section id="convictions">
+  <div class="inner">
+    <p class="section-eyebrow reveal">03 · What the Vision Believes It Is Doing</p>
+    <h2 class="section-title reveal">The Theological Convictions Behind It</h2>
+    <p class="section-subtitle reveal">Not organizational ambition — doxological faithfulness</p>
+    <div class="gold-rule reveal"></div>
+
+    <p class="conviction-intro reveal">
+      When <b>Vision 1,000</b> is realized, it will only be a testimony and witness of God's glory. The <b>1,000</b> is not a trophy; it is a
+      community of a thousand transformed lives. Not an organizational achievement — but a
+      doxological event. A glimpse, here and now, of the great multitude from every nation that will
+      one day worship together (Rev. 7:9–10). <b>1,000</b> is a number manifesting the power of the Gospel as unstoppable, putting the church on offense side and truly the <i>"gates of Hades cannot prevail."</i> The goal was never institutional success.
+      The goal was always the glory of God made visible through changed lives, disciples loving each other and abiding in Lord Jesus Christ (Matt. 16:18 · Col. 1:10 · Heb. 12:2 · John 13:35 · John 15:4-5 ).
+    </p>
+
+    <div class="two-col reveal">
+      <div class="two-col-pane">
+        <h4>God's Part</h4>
+        <ul>
+          <li>God builds the church — we do not <em style="color:var(--gold-lt)">(Matt. 16:18)</em></li>
+          <li>Christ's love is what compels us <em style="color:var(--gold-lt)">(2 Cor. 5:14)</em></li>
+          <li>The Spirit provides the power <em style="color:var(--gold-lt)">(Acts 1:8 · 1 Cor. 4:20)</em></li>
+          <li>Christ perfects what He begins <em style="color:var(--gold-lt)">(Heb. 12:2)</em></li>
+          <li>We are His workmanship, not our own volition <em style="color:var(--gold-lt)">(Eph. 2:10)</em></li>
+        </ul>
+      </div>
+      <div class="two-col-pane">
+        <h4>Our Part</h4>
+        <ul>
+          <li>Faith — complete dependence on God <em style="color:var(--gold-lt)">(Heb. 11:6)</em></li>
+          <li>Obedience to what Christ teaches <em style="color:var(--gold-lt)">(Matt. 28:20)</em></li>
+          <li>Cultivating and guarding faithfully <em style="color:var(--gold-lt)">(Gen. 2:15)</em></li>
+          <li>Living beyond ourselves for others <em style="color:var(--gold-lt)">(Col. 1:10 · Phil. 3:8)</em></li>
+          <li>Perseverance through various trials <em style="color:var(--gold-lt)">(James 1:2–4)</em></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="founder-box reveal" style="margin-top:1.4rem;">
+      <h4>Why There Is No Named Founder</h4>
+      <span class="ref-tag">1 Cor. 3:5–7 · Heb. 10:24–25 · Matt. 7:24–27</span>
+      <p>
+        The anonymity of founding leaders is not humility performed — it is a structural theological stance against personality-driven church culture. "What, after all, is Apollos? And what is Paul? Only servants." (1 Cor. 3:5–7)
+        Vision 1,000 is built on a deliberate theological conviction: no individual's name stands
+        over the community. Founders are identified not by title or reputation but by disposition —
+        those who loved the Lord, kept meeting together (Heb. 10:24–25), and agreed in humility
+        that this vision was planted by God, not by them. The house is built on the rock, not on the
+        architect's reputation (Matt. 7:24–27).
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ⑤ DISCIPLESHIP -->
+<section id="discipleship">
+  <div class="inner">
+    <p class="section-eyebrow reveal">04 · How the Vision Forms People</p>
+    <h2 class="section-title reveal">The Discipleship Philosophy</h2>
+    <p class="section-subtitle reveal">Formation that flows from the inside out</p>
+    <div class="gold-rule reveal"></div>
+
+    <div class="disc-grid reveal">
+      <div class="disc-item">
+        <p class="di-num">Disciples, Not Attendees</p>
+        <h3>Visible and Available</h3>
+        <span class="ref-tag">Matt. 28:19–20 · Heb. 10:24–25 · 1 Thess. 4:11</span>
+        <div class="panel-rule"></div>
+        <p>Vision 1,000 does not count people who simply attend. It counts people who are visible and
+        available — those who deliberately place themselves within the ordinary means through which
+        God works: His Word, His people, prayer, teaching, correction, and mutual service.
+        Transformation belongs to God. The community's job is to faithfully create the conditions
+        where people continually encounter Christ.</p>
+      </div>
+      <div class="disc-item">
+        <p class="di-num">The Overflow Model</p>
+        <h3>From the Inside Out</h3>
+        <span class="ref-tag">Col. 3:16 · John 21:15–17 · Gal. 2:10 · 1 Cor. 14:1</span>
+        <div class="panel-rule"></div>
+        <p>Discipleship in Vision 1,000 flows in one direction: inward devotion overflows into
+        community care, which naturally overflows into the world. A shepherd cares for the flock because
+        he loves the Shepherd (John 21:15–17) — not because there is a program. Care for the poor (Gal. 2:10) and service
+        to others are not initiatives added onto community life. They are the natural overflow
+        of people being changed from the inside (Col. 3:16).</p>
+      </div>
+      <div class="disc-item">
+        <p class="di-num">Two Tracks, One Life</p>
+        <h3>Spiritual and Practical</h3>
+        <span class="ref-tag">Eph. 4:28 · Prov. 3:5–6 · 1 Tim. 4:7 · Phil. 3:8</span>
+        <div class="panel-rule"></div>
+        <p>Formation runs on two tracks: Elders oversee spiritual formation — discipleship, Bible
+        study, sound teaching, and counsel. Deacons oversee practical formation — answering real
+        questions about work, applied accountability and daily life. But these are not two separate programs.
+        They are one integrated life: practical wisdom is always rooted in its theological
+        foundation (Prov. 3:5–6). The knowledge of Christ surpasses all (Phil. 3:8).</p>
+      </div>
+      <div class="disc-item">
+        <p class="di-num">Why the Number Matters</p>
+        <h3>A Discipleship Ecology</h3>
+        <span class="ref-tag">Ex. 18:21–22 · Prov. 27:17 · 1 Tim. 4:7 · James 1:2–4 · Rom. 5:3–4</span>
+        <div class="panel-rule"></div>
+        <p>The limit of 1,000 is not a ceiling on ambition — it is a boundary for genuine formation.
+        At this scale, every member can be known, every soul held accountable, every gift located
+        and used. Like Jethro's counsel to Moses (Ex. 18:21–22), structure exists so no one falls
+        through. Iron sharpens iron (Prov. 27:17). Steadfastness under trial is formed together,
+        not alone (James 1:2–4 · Rom. 5:3–4).</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ⑥ STRUCTURE -->
+<section id="structure">
+  <div class="inner">
+    <p class="section-eyebrow reveal">05 · How the Community Is Structured</p>
+    <h2 class="section-title reveal">Leadership, Roles, and Built-In Safeguards</h2>
+    <p class="section-subtitle reveal">A structure designed to serve, not to dominate</p>
+    <div class="gold-rule reveal"></div>
+
+    <div class="org-stack reveal">
+      <div class="org-card">
+        <h3>Facilitating Pastor</h3>
+        <p>The single unifying leader who serves the Elders and Deacons. Fulltime, with a defined
+        term — the Pastor rotates to Elder or Deacon after a set number of years.
+        Sabbatical provision is built in. No one holds this seat permanently.</p>
+      </div>
+      <div class="org-connector"></div>
+      <div class="org-card">
+        <h3>12 Elders</h3>
+        <p>Ministers of the Word. They pray, preach, teach, shepherd, and counsel.
+        Ideally fulltime. The eldership is plural — no single voice holds final authority
+        over the community's spiritual life. <em style="color:rgba(255,255,255,0.45); font-size:0.78rem;">1 Tim. 5:17–18 · Titus 1:5 · Acts 14:23</em></p>
+      </div>
+      <div class="org-connector"></div>
+      <div class="org-card">
+        <h3>12 Deacons</h3>
+	<p style="color:#36454F;">Servers of the people. They oversee practical needs, finances, and community programs.
+        A maximum of four are fulltime. Deacons answer the 'how' of a life transformed —
+        connecting faith to work, applied accountability, and daily responsibility.
+        <em style="color:rgba(0,0,0,0.45); font-size:0.78rem;">Acts 6:1–7 · Eph. 4:28</em></p>
+      </div>
+      <div class="org-connector"></div>
+      <div class="org-card">
+        <h3>Members — Vision 1,000</h3>
+        <p style="color:#36454F;">Ages 21–60 are counted toward the 1,000. Those 65 and older are honored as active
+        participants, assigned by Scripture to teach the younger generation in godliness,
+        self-control, and love.
+        <em style="color:rgba(0,0,0,0.45); font-size:0.78rem;">Titus 2:2–5 · Prov. 29:18 · Josh. 1:7–9</em></p>
+      </div>
+    </div>
+
+    <div class="safeguards-row reveal">
+      <div class="safe-box">
+        <h4>Three Built-In Safeguards</h4>
+        <span class="ref-tag">Mark 10:42–45 · 1 Pet. 5:3</span>
+        <ul>
+          <li>Pastor rotation — no one holds permanent top authority.</li>
+          <li>Anonymous founding — the vision is not attached to a personality.</li>
+          <li>The 1,000 ceiling — scale is deliberately kept shepherdable.</li>
+        </ul>
+        <p style="margin-top:0.8rem; font-size:0.8rem; color:rgba(255,255,255,0.5); font-style:italic;">
+          Each is structural, not aspirational — built into the design so that
+          no leader lords it over the flock.
+        </p>
+      </div>
+      <div class="safe-box">
+        <h4>Who Is Responsible for What</h4>
+        <span class="ref-tag">1 Cor. 3:6–7 · Col. 2:6–7</span>
+        <p>The community is responsible for faithfulness — showing up, teaching well, caring
+        genuinely. God is responsible for transformation. We plant. We water. The increase
+        belongs to God alone (1 Cor. 3:6–7). What carries forward in every generation is not
+        a model but people rooted in Christ (Col. 2:6–7). This distinction protects the community
+        from both passivity and pride.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ⑦ COMMUNITY LIFE -->
+<section id="life">
+  <div class="inner">
+    <p class="section-eyebrow reveal">06 · What Community Life Looks Like</p>
+    <h2 class="section-title reveal">Spiritual Formation and Practical Care</h2>
+    <p class="section-subtitle reveal">Two tracks — one integrated life</p>
+    <div class="gold-rule reveal"></div>
+
+    <div class="life-cols reveal">
+      <div class="life-col">
+        <h3>Spiritual Formation</h3>
+        <div class="panel-rule"></div>
+        <ul>
+          <li>Weekly gathering together as a community <em style="color:var(--light); font-size:0.78rem;">(Heb. 10:24–25)</em></li>
+          <li>Corporate and personal prayer <em style="color:var(--light); font-size:0.78rem;">(James 5:16)</em></li>
+          <li>Discipleship groups led by Elders <em style="color:var(--light); font-size:0.78rem;">(Matt. 28:20)</em></li>
+          <li>Preaching and sound biblical teaching <em style="color:var(--light); font-size:0.78rem;">(2 Tim. 4:2)</em></li>
+          <li>Biblical counseling for life's real struggles <em style="color:var(--light); font-size:0.78rem;">(Gal. 6:1–2)</em></li>
+          <li>Mutual correction and encouragement in truth <em style="color:var(--light); font-size:0.78rem;">(Col. 3:16)</em></li>
+          <li>Iron sharpening iron — growth through relationship  and adominishing one another<em style="color:var(--light); font-size:0.78rem;">(Prov. 27:17) (Col. 3:16)</em></li>
+          <li>Turning back those who wander from truth <em style="color:var(--light); font-size:0.78rem;">(James 5:20)</em></li>
+        </ul>
+        <span class="ref-tag">Heb. 10:24–25 · Col. 3:16 · 1 Cor. 14:1</span>
+      </div>
+      <div class="life-divider"></div>
+      <div class="life-col">
+        <h3>Practical Care</h3>
+        <div class="panel-rule"></div>
+        <ul>
+          <li>Vocational and skills training <em style="color:var(--light); font-size:0.78rem;">(Eph. 4:28)</em></li>
+          <li>Care for widows, the poor, and the elderly <em style="color:var(--light); font-size:0.78rem;">(Acts 6:1–7)</em></li>
+          <li>Livelihood development for community members <em style="color:var(--light); font-size:0.78rem;">(Prov. 14:23)</em></li>
+          <li>Community service and outreach programs <em style="color:var(--light); font-size:0.78rem;">(Matt. 25:40)</em></li>
+          <li>Educational initiatives for families <em style="color:var(--light); font-size:0.78rem;">(Ps. 78:4)</em></li>
+          <li>A school — a vision held in prayer, not yet realized <em style="color:var(--light); font-size:0.78rem;">(Prov. 29:18)</em></li>
+          <li>Deliberate remembrance and service of the poor <em style="color:var(--light); font-size:0.78rem;">(Gal. 2:10)</em></li>
+          <li>Quiet, faithful labor as a witness to the world <em style="color:var(--light); font-size:0.78rem;">(1 Thess. 4:11)</em></li>
+        </ul>
+        <span class="ref-tag">Gal. 2:10 · Matt. 25:40 · Eph. 4:28</span>
+      </div>
+    </div>
+
+    <div class="life-bottom reveal">
+      <div class="life-bottom-block">
+        <h4>Preparing the Soil</h4>
+        <span class="ref-tag">Mark 4:8 · Prov. 29:18 · Ps. 107:35–38</span>
+        <p>Vision 1,000 is not primarily an evangelism strategy. It is agricultural theology.
+        The community cultivates conditions — order, truth, care, accountability, belonging —
+        in which the Word of God takes root and produces fruit that lasts (Mark 4:8).
+        The specific programs will change across generations. The vision remains.</p>
+      </div>
+      <div class="life-bottom-block">
+        <h4>Those Over 65</h4>
+        <span class="ref-tag">Titus 2:2–5 · Ps. 78:4</span>
+        <p>The older members of the community are being honored. They may continue to serve as long as they can. Teaching younger members in godliness, self-control,
+        and love. Their wisdom is a living gift to every generation that follows them.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ⑧ PHASES OF GROWTH -->
+<section id="phases">
+  <div class="inner">
+    <p class="section-eyebrow reveal">07 · The Phases of Growth</p>
+    <h2 class="section-title reveal">How Vision 1,000 Develops Over Time</h2>
+    <p class="section-subtitle reveal">Six phases from seed to sending</p>
+    <div class="gold-rule reveal"></div>
+
+    <div class="phases-grid reveal">
+
+      <div class="phase-card">
+        <div class="phase-range">1–12</div>
+        <div class="phase-name">Seed</div>
+        <div class="phase-sub">Vision cast and received</div>
+        <div class="phase-divider"></div>
+        <p class="phase-body">A house church. No formal structure — only leaders identified by
+        disposition, not title. The vision is cast, received, and prayed over together.
+        The Spirit confirms before structure forms. Character before anything else.</p>
+        <div class="phase-refs">Matt. 18:20 · Heb. 10:24–25 · Acts 14:23</div>
+      </div>
+
+      <div class="phase-card">
+        <div class="phase-range">13–40</div>
+        <div class="phase-name">Roots</div>
+        <div class="phase-sub">First leaders identified</div>
+        <div class="phase-divider"></div>
+        <p class="phase-body">Informal but intentional. Elders are bivocational. One or two Deacons
+        begin serving practically. Discipleship rhythms are established. Character comes before title.
+        The community learns to meet, pray, and sharpen each other.</p>
+        <div class="phase-refs">Acts 14:23 · Titus 1:5 · Prov. 27:17</div>
+      </div>
+
+      <div class="phase-card">
+        <div class="phase-range">41–100</div>
+        <div class="phase-name">Early Growth</div>
+        <div class="phase-sub">Structure begins to formalize</div>
+        <div class="phase-divider"></div>
+        <p class="phase-body">The first fulltime pastoral or elder role is prayerfully considered.
+        Financial accountability is established — a treasurer and auditor are put in place.
+        Deacon teams form around specific practical needs. The community grows intentionally,
+        not merely numerically.</p>
+        <div class="phase-refs">1 Tim. 5:17–18 · Acts 6:1–7 · Titus 1:5</div>
+      </div>
+
+      <div class="phase-card">
+        <div class="phase-range">101–200</div>
+        <div class="phase-name">Established Growth</div>
+        <div class="phase-sub">Fulltime leadership confirmed</div>
+        <div class="phase-divider"></div>
+        <p class="phase-body">The first fulltime role is warranted and affirmed — not assumed.
+        Elder plurality is reinforced. Deacon teams are active and sustainable.
+        Discipleship groups deepen. Practical formation programs begin to take shape.
+        The community tests its own rhythms and corrects what does not hold.</p>
+        <div class="phase-refs">1 Tim. 5:17–18 · Eph. 4:11–13 · Acts 6:1–7</div>
+      </div>
+
+      <div class="phase-card">
+        <div class="phase-range">201–600</div>
+        <div class="phase-name">Maturity</div>
+        <div class="phase-sub">Full team; programs launch</div>
+        <div class="phase-divider"></div>
+        <p class="phase-body">Multiple fulltime Elders. Practical community programs become
+        sustainable. The school vision enters prayer and planning. First multiplication
+        conversations begin. The community begins to see itself as a sending body,
+        not merely a gathering one.</p>
+        <div class="phase-refs">Eph. 4:11–13 · Ps. 107:35–38 · 2 Tim. 2:2</div>
+      </div>
+
+      <div class="phase-card sending">
+        <div class="phase-range">601–1,000</div>
+        <div class="phase-name">Sending</div>
+        <div class="phase-sub">Leaders prepared and commissioned</div>
+        <div class="phase-divider"></div>
+        <p class="phase-body">The community approaches its limit. Leaders formed within it
+        are identified, affirmed, and sent out. Sending is not pruning — it is the vision
+        completing its own deepest logic. The ceiling becomes the womb.
+        The Great Commission moves forward.</p>
+        <div class="phase-refs">Acts 13:1–3 · Matt. 28:19 · Gal. 2:9–10</div>
+      </div>
+
+    </div>
+
+    <p class="phases-note reveal">
+      Growth thresholds are not fixed targets. Each phase requires discernment —
+      concrete indicators and Spirit-led judgment govern every transition.
+      <em>1 Tim. 5:17–18 · Acts 14:23</em>
+    </p>
+  </div>
+</section>
+
+<!-- ⑨ MEASUREMENTS -->
+<section id="measures">
+  <div class="inner">
+    <p class="section-eyebrow reveal">08 · What the Vision Measures</p>
+    <h2 class="section-title reveal">Accountability Without Scorekeeping</h2>
+    <p class="section-subtitle reveal">Numbers measure the container, not the content</p>
+    <div class="gold-rule reveal"></div>
+
+    <div class="reveal" style="overflow-x:auto;">
+      <table class="measures-table">
+        <thead>
+          <tr>
+            <th>What Is Measured</th>
+            <th>What It Looks Like in Practice</th>
+            <th>Scriptural Basis</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Membership <span>Active, ages 21–60</span></td>
+            <td>Tracks progress toward 1,000 and informs multiplication decisions.
+                Not a scorecard — a shepherd's headcount.</td>
+            <td>Josh. 1:7–9</td>
+          </tr>
+          <tr>
+            <td>Discipleship Depth <span>Spiritual formation</span></td>
+            <td>Bible study attendance, discipleship groups, baptisms, and visible
+                growth in obedience to Christ's teaching.</td>
+            <td>Matt. 28:19–20 · Col. 3:16 · 1 Tim. 4:7</td>
+          </tr>
+          <tr>
+            <td>Community Overflow <span>Practical care</span></td>
+            <td>Families served, vocational trainees, widows and elderly supported,
+                funds distributed to the members in need in a sustainable manner.</td>
+            <td>Gal. 2:10 · Matt. 25:40 · Eph. 4:28</td>
+          </tr>
+          <tr>
+            <td>Leadership Pipeline <span>Multiplication readiness</span></td>
+            <td>Elders-in-formation, active Deacons, health of the Pastor rotation,
+                and the number of leaders sent out to new communities.</td>
+            <td>2 Tim. 2:2 · Acts 13:1–3 · Titus 1:5</td>
+          </tr>
+          <tr>
+            <td>Financial Stewardship <span>Accountability</span></td>
+            <td>Treasurer and auditor reports, the ratio of community care to operational
+                spending, and Elder financial support.</td>
+            <td>2 Cor. 9:7 · 1 Tim. 5:17–18</td>
+          </tr>
+          <tr>
+            <td>Steadfastness <span>Character under pressure</span></td>
+            <td>Testimonies of members who counted trials as joy, retained their faith,
+                and grew in perseverance through suffering for the Gospel.</td>
+            <td>James 1:2–4 · Rom. 5:3–4</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="measures-caption reveal">
+      The community is responsible for faithfulness. God is responsible for transformation.
+      Measurements serve as stewardship accountability — never as spiritual report cards.
+      <em>1 Cor. 3:6–7</em>
+    </p>
+  </div>
+</section>
+
+<!-- ⑩ MULTIPLICATION -->
+<section id="multiplication">
+  <div class="inner">
+    <p class="section-eyebrow reveal">09 · Multiplication: Sending as Love</p>
+    <h2 class="section-title reveal">What Happens When the Vision Is Fulfilled</h2>
+    <p class="section-subtitle reveal">The ceiling is not a wall — it is a womb</p>
+    <div class="gold-rule reveal"></div>
+
+    <div class="mult-panels reveal">
+      <div class="mult-card">
+        <h3>The Ceiling Is a Womb</h3>
+        <span class="ref-tag">Acts 13:1–3 · Matt. 28:19 · Matt. 28:17–20</span>
+        <div class="phase-divider"></div>
+        <p>The 1,000 is not a wall — it is a point of reproduction. When the community approaches
+        its limit, it does not stop growing. It multiplies. Leaders formed within the community
+        are identified, affirmed, and sent — exactly as the church at Antioch commissioned Paul
+        and Barnabas. This is the Great Commission operating locally, generation by generation.
+        The limit exists not to contain the vision but to ensure it travels well.</p>
+      </div>
+      <div class="mult-card">
+        <h3>Full Independence, Open Hands</h3>
+        <span class="ref-tag">Gal. 2:9–10 · Phil. 1:3–5 · Rom. 14:5 · 1 Cor. 12:4–6</span>
+        <div class="phase-divider"></div>
+        <p>Communities that are sent out are fully independent from the start. No structural
+        authority is retained. No compliance is required. Sent communities may follow the
+        Vision 1,000 pattern or discern their own form — both are held loosely. The posture
+        mirrors Paul toward the churches he planted: sustained by love, available when invited,
+        never controlling. Support that demands compliance is not support.</p>
+      </div>
+      <div class="mult-card">
+        <h3>What Actually Gets Exported</h3>
+        <span class="ref-tag">2 Tim. 2:2 · Col. 2:6–7 · Phil. 1:3–5</span>
+        <div class="phase-divider"></div>
+        <p>What goes with the sent community is not a model, a brand, or a set of programs.
+        It is people — men and women rooted in Christ, trained in the faithful cultivation
+        and guarding of what God entrusts, marked by the Great Commission. The lasting
+        relationship between sending and sent communities is built not on shared systems or mutual benefits
+        but on the love of Christ. That love is the only thing that outlasts every structure.</p>
+      </div>
+    </div>
+
+    <div class="tension-box reveal">
+      <h4>Tested Pattern vs. The Spirit's Freedom</h4>
+      <span class="ref-tag">Rom. 14:5 · 1 Cor. 12:4–6 · Gal. 2:9–10</span>
+      <p>Scripture does not prescribe a single form for the church. Vision 1,000 holds its own
+      pattern as a gift received — not a law enforced on those it sends. Sent communities may
+      adapt or depart from it entirely. This tension is left deliberately unresolved.
+      It is not a flaw in the framework. It is faithfulness to what Scripture itself does not settle.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ⑪ SCRIPTURE INDEX -->
+<section id="index">
+  <div class="inner">
+    <p class="section-eyebrow reveal">Scripture Index</p>
+    <h2 class="section-title reveal">All References by Category</h2>
+    <p class="section-subtitle reveal">Every passage cited across the Vision 1,000 framework</p>
+    <div class="gold-rule reveal"></div>
+
+    <div class="index-grid reveal">
+      <div class="index-cat">
+        <h4>Biblical Foundations</h4>
+        <ul>
+          <li><span class="i-ref">Gen. 2:15</span><span class="i-desc">Abad &amp; Shamar — creation-order vocation</span></li>
+          <li><span class="i-ref">2 Cor. 3:18</span><span class="i-desc">Continuously transformed into Christ's image</span></li>
+          <li><span class="i-ref">Rom. 8:29</span><span class="i-desc">Conformed to the image of the Son</span></li>
+          <li><span class="i-ref">Ps. 78:4</span><span class="i-desc">Wonders told to the next generation</span></li>
+          <li><span class="i-ref">Ps. 107:35–38</span><span class="i-desc">Redeemed people; community fruitfulness</span></li>
+          <li><span class="i-ref">Matt. 16:18</span><span class="i-desc">Christ builds the church</span></li>
+          <li><span class="i-ref">Matt. 28:17–20</span><span class="i-desc">Great Commission — operational charter</span></li>
+          <li><span class="i-ref">Acts 1:8</span><span class="i-desc">Spirit as the only sufficient power</span></li>
+          <li><span class="i-ref">Eph. 2:20</span><span class="i-desc">Built on apostles; Christ the cornerstone</span></li>
+          <li><span class="i-ref">Rev. 7:9–10</span><span class="i-desc">Eschatological multitude; vision image</span></li>
+        </ul>
+      </div>
+      <div class="index-cat">
+        <h4>Theological Vision</h4>
+        <ul>
+          <li><span class="i-ref">Heb. 1:3</span><span class="i-desc">Image of Christ</span></li>
+          <li><span class="i-ref">2 Cor. 5:14</span><span class="i-desc">Christ's love compels</span></li>
+          <li><span class="i-ref">Col. 1:10</span><span class="i-desc">Life worthy of the Lord</span></li>
+          <li><span class="i-ref">Eph. 2:10</span><span class="i-desc">Created for good works in Christ</span></li>
+          <li><span class="i-ref">Heb. 12:2</span><span class="i-desc">Christ the perfecter and finisher</span></li>
+          <li><span class="i-ref">Heb. 11:6</span><span class="i-desc">Faith as complete dependence</span></li>
+          <li><span class="i-ref">1 Cor. 3:5–7</span><span class="i-desc">Servants only; God gives growth</span></li>
+          <li><span class="i-ref">1 Cor. 4:20</span><span class="i-desc">Kingdom is power, not words</span></li>
+          <li><span class="i-ref">Matt. 7:24–27</span><span class="i-desc">Built on the rock</span></li>
+          <li><span class="i-ref">Col. 2:6–7</span><span class="i-desc">Rooted and built in Christ</span></li>
+        </ul>
+      </div>
+      <div class="index-cat">
+        <h4>Discipleship &amp; Formation</h4>
+        <ul>
+          <li><span class="i-ref">John 21:15–17</span><span class="i-desc">Feed my sheep; love as discipleship root</span></li>
+          <li><span class="i-ref">Col. 3:16</span><span class="i-desc">Word dwelling richly; mutual teaching</span></li>
+          <li><span class="i-ref">Prov. 27:17</span><span class="i-desc">Iron sharpens iron</span></li>
+          <li><span class="i-ref">James 5:20</span><span class="i-desc">Turning back from error</span></li>
+          <li><span class="i-ref">1 Tim. 4:7</span><span class="i-desc">Train in godliness</span></li>
+          <li><span class="i-ref">Prov. 3:5–6</span><span class="i-desc">Trust in the Lord; practical wisdom</span></li>
+          <li><span class="i-ref">1 Thess. 4:11</span><span class="i-desc">Quiet, practical, faithful life</span></li>
+          <li><span class="i-ref">Phil. 3:8</span><span class="i-desc">Knowledge of Christ surpasses all</span></li>
+          <li><span class="i-ref">James 1:2–4</span><span class="i-desc">Joy in trials; steadfastness</span></li>
+          <li><span class="i-ref">Mark 4:8</span><span class="i-desc">Good soil; the Word taking root</span></li>
+          <li><span class="i-ref">1 Cor. 14:1</span><span class="i-desc">Pursue love above all</span></li>
+          <li><span class="i-ref">Heb. 10:24–25</span><span class="i-desc">Keep meeting together</span></li>
+          <li><span class="i-ref">Rom. 5:3–4</span><span class="i-desc">Suffering produces steadfastness</span></li>
+	  <li><span class="i-ref">John 13:35</span><span class="i-desc">Known by Love in Christ</span></li>
+	  <li><span class="i-ref">John 15:4-5</span><span class="i-desc">Abiding in Christ</span></li>
+        </ul>
+      </div>
+      <div class="index-cat">
+        <h4>Leadership &amp; Structure</h4>
+        <ul>
+          <li><span class="i-ref">Acts 6:1–7</span><span class="i-desc">Deacons; serving practical needs</span></li>
+          <li><span class="i-ref">1 Tim. 5:17–18</span><span class="i-desc">Double honor; financial support for elders</span></li>
+          <li><span class="i-ref">Titus 1:5</span><span class="i-desc">Appointing elders in every town</span></li>
+          <li><span class="i-ref">Titus 2:2–5</span><span class="i-desc">Older members as teachers and models</span></li>
+          <li><span class="i-ref">Acts 14:23</span><span class="i-desc">Elders appointed in each church</span></li>
+          <li><span class="i-ref">Ex. 18:21–22</span><span class="i-desc">Jethro's structure; manageable shepherding</span></li>
+          <li><span class="i-ref">Mark 10:42–45</span><span class="i-desc">Servant leadership; not lording over</span></li>
+          <li><span class="i-ref">1 Pet. 5:3</span><span class="i-desc">Not domineering; examples to the flock</span></li>
+          <li><span class="i-ref">Prov. 29:18</span><span class="i-desc">Without vision, people perish</span></li>
+          <li><span class="i-ref">Josh. 1:7–9</span><span class="i-desc">Strong and courageous; clear goal</span></li>
+          <li><span class="i-ref">Isa. 60:22</span><span class="i-desc">The least becoming a thousand; the Lord hastens it</span></li>
+        </ul>
+      </div>
+      <div class="index-cat">
+        <h4>Community &amp; Multiplication</h4>
+        <ul>
+          <li><span class="i-ref">Gal. 2:10</span><span class="i-desc">Remember the poor</span></li>
+          <li><span class="i-ref">Matt. 25:40</span><span class="i-desc">Serving the least is serving Christ</span></li>
+          <li><span class="i-ref">Eph. 4:11–13</span><span class="i-desc">Equipping saints for maturity</span></li>
+          <li><span class="i-ref">Eph. 4:28</span><span class="i-desc">Labor; practical answer to poverty</span></li>
+          <li><span class="i-ref">Acts 13:1–3</span><span class="i-desc">Antioch sending model</span></li>
+          <li><span class="i-ref">2 Tim. 2:2</span><span class="i-desc">Entrust to faithful who will teach others</span></li>
+          <li><span class="i-ref">Gal. 2:9–10</span><span class="i-desc">Fellowship; open hands toward sent communities</span></li>
+          <li><span class="i-ref">Phil. 1:3–5</span><span class="i-desc">Partnership in the gospel</span></li>
+          <li><span class="i-ref">Rom. 14:5</span><span class="i-desc">Freedom in non-essentials</span></li>
+          <li><span class="i-ref">1 Cor. 12:4–6</span><span class="i-desc">Varieties of gifts, same Spirit</span></li>
+          <li><span class="i-ref">2 Cor. 9:7</span><span class="i-desc">Cheerful giving; financial stewardship</span></li>
+	  <li><span class="i-ref">Prov. 14:23 </span><span class="i-desc">Profit in Godly labor</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p class="f-stars">✦ &nbsp; ✦ &nbsp; ✦</p>
+  <p class="f-title">Vision 1,000</p>
+  <p>A Public Guide to Understanding the Vision</p>
+  <p style="margin-top:0.8rem; font-size:0.7rem; opacity:0.4;">
+"The least of you will become a thousand..." — Isaiah 60:22
+    <p style="margin-top:0.8rem; font-size:0.7rem; opacity:0.4;">
+"And I tell you that you are Peter, and on this rock I will build my church,
+    and the gates of Hades will not overcome it." — Matthew 16:18
+  </p>
+</footer>
+
+<script>
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); }
+    });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
